@@ -2,10 +2,10 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.patches import Rectangle
 import numpy as np
-import config  # Import config for paths etc.
+import financebot.src.config as config
 
 # Helper to reuse date formatting from data_handler
-from data_handler import _formattime as formattime
+from financebot.src.data_handler import _formattime as formattime
 
 
 def plot_loss(train_loss_list, validation_loss_list, path=config.LOSS_PLOT_PATH):

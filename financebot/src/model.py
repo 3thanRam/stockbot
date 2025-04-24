@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import math
 import os
-import config
+import financebot.src.config as config
 
 
 class PositionalEncoding(nn.Module):

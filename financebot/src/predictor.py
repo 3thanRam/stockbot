@@ -1,5 +1,5 @@
 import torch
-import config  # Import configuration
+import financebot.src.config as config
 import numpy as np
 
 def predict_autoregressive(model, input_sequence_norm,n_pred = config.N_PRED_INFERENCE):

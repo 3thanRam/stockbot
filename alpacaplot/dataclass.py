@@ -7,8 +7,7 @@ from alpaca.data import StockHistoricalDataClient
 from alpaca.data.requests import StockBarsRequest
 from alpaca.data.timeframe import TimeFrame, TimeFrameUnit
 
-sys.path.append(os.path.abspath(os.path.join('Personal')))
-sys.path.append(os.path.abspath(os.path.join('Personal','financebot','src')))
+
 import financebot.src.config as config
 from financebot.src.predictor import infer_realdata
 from account import alpacaAccount

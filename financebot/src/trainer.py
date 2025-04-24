@@ -1,5 +1,5 @@
 import torch
-import config
+import financebot.src.config as config
 import numpy as np
 
 

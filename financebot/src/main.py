@@ -1,13 +1,18 @@
 import numpy as np
 from datetime import timedelta,datetime
+import os 
+import sys
+srcpath=os.path.dirname(os.path.realpath(__file__))
+botdir="/".join(srcpath.split("/")[:-2])
+sys.path.append(botdir)
 
 # Import configuration and modules
-import config
-from model import TransformerModel
-from data_handler import get_training_data, get_live_data
-from trainer import batchify_data, fit
-from predictor import predict_autoregressive
-from plotting_utils import plot_loss, plot_prediction
+import financebot.src.config as config
+from financebot.src.model import TransformerModel
+from financebot.src.data_handler import get_training_data, get_live_data
+from financebot.src.trainer import batchify_data, fit
+from financebot.src.predictor import predict_autoregressive
+from financebot.src.plotting_utils import plot_loss, plot_prediction
 
 
 def main_workflow():

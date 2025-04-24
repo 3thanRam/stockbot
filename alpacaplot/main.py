@@ -3,18 +3,22 @@ import sys
 
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-sys.path.append(os.path.abspath(os.path.join('Personal')))
-sys.path.append(os.path.abspath(os.path.join('Personal','financebot','src')))
+#sys.path.append(os.path.abspath(os.path.join('Personal')))
+#sys.path.append(os.path.abspath(os.path.join('Personal','financebot','src')))
+plotpathpath=os.path.dirname(os.path.realpath(__file__))
+botdir=plotpathpath.strip(plotpathpath.split("/")[-1])[:-1]
+sys.path.append(botdir)
 
 import financebot.src.config as config
 from financebot.src.model import TransformerModel
+
 from livedata import plotlivedata
 from simulatedata import plotsimulateddata
 from plot import initfig,plotbuttons
 
 def main(symbols = ["TSLA"],num_frames=10**5,interval=10**3,livedata=True,whattoshow=1):
     model = TransformerModel().to(config.DEVICE)
-    model_path=os.path.join(os.getcwd(),'Personal' ,'financebot', 'data', 'modelsave_multistep.pth')
+    model_path=config.MODEL_SAVE_PATH
     if not os.path.isfile(model_path):
         print("Can't find model data path")
         exit(0)

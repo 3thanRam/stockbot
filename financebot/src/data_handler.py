@@ -7,7 +7,7 @@ import torch
 import matplotlib.dates as mdates
 from alpaca.data import StockHistoricalDataClient
 from alpaca.data.requests import StockBarsRequest
-import config  # Import configuration
+import financebot.src.config as config
 
 # Global list to track skipped symbols (if needed elsewhere)
 skipped_symbols_list = []
