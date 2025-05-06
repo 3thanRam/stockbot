@@ -1,0 +1,4 @@
+alpaca==1.0.0
+matplotlib==3.10.1
+numpy==2.2.5
+torch==2.6.0+cpu
