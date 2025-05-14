@@ -99,8 +99,7 @@ class plotbuttons:
         if self.selected==0: # If 'input shift' is selected
             self.pdata.WindowXshift+=1 # Increase window shift
             # Apply constraints to the shift value
-            self.pdata.WindowXshift=min(self.pdata.WindowXshift,0)
-            self.pdata.WindowXshift=max(self.pdata.WindowXshift,-self.pdata.SEQ_LEN,-self.pdata.t) # Ensure shift is within valid range
+            self.pdata.WindowXshift=min(self.pdata.WindowXshift,len(self.pdata.alldatapoints)-1-self.pdata.SEQ_LEN-self.pdata.t)
         else: # If 'pred len' is selected
             self.pdata.predictionL+=1 # Increase prediction length
             self.pdata.predictionL=max(self.pdata.predictionL,1) # Ensure prediction length is at least 1
@@ -109,8 +108,7 @@ class plotbuttons:
         if self.selected==0: # If 'input shift' is selected
             self.pdata.WindowXshift-=1 # Decrease window shift
             # Apply constraints to the shift value
-            self.pdata.WindowXshift=min(self.pdata.WindowXshift,0)
-            self.pdata.WindowXshift=max(self.pdata.WindowXshift,-self.pdata.SEQ_LEN,-self.pdata.t) # Ensure shift is within valid range
+            self.pdata.WindowXshift=max(self.pdata.WindowXshift,-self.pdata.t+1+self.pdata.SEQ_LEN)
         else: # If 'pred len' is selected
             self.pdata.predictionL-=1 # Decrease prediction length
             self.pdata.predictionL=max(self.pdata.predictionL,1) # Ensure prediction length is at least 1

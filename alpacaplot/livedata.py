@@ -33,9 +33,10 @@ class plotlivedata(plotdata):
         global streamdata # Access the global variable to store stream data
         # Call the constructor of the parent class (plotdata)
         super().__init__(model,whattoshow,ax,symbols,artists)
+        
         # Define the time range for fetching initial historical data (e.g., 1 week ending 15 mins ago)
         end = (datetime.now().astimezone() - timedelta(minutes=15))
-        start = end - timedelta(weeks=1)
+        start = end - timedelta(days=200)
         # Fetch initial historical data to populate the plot before the stream starts
         streamdata=gethistoricalstockbars(symbols,start,end,self.timeframe)
         # Print the number of historical data points fetched
@@ -67,7 +68,7 @@ class plotlivedata(plotdata):
             alldatapoints=self.getdata()
             # Check if new data has been added to streamdata since the last update
             if self.alldatapoints!=alldatapoints:
-                self.t+=1 # Increment simulated time step (only when new data arrives)
+                self.t=len(alldatapoints)-self.SEQ_LEN
                 # Update internal lists with the new complete data
                 self.alldatapoints=alldatapoints
                 self.allDates=[dat[0] for dat in  self.alldatapoints]
