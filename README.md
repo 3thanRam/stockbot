@@ -97,16 +97,16 @@ The plot window will appear, displaying the historical data, predicted future va
 │   ├── livedata.py       # Handles fetching and integrating live Alpaca stream data
 │   ├── simulatedata.py   # Handles fetching historical data and simulating a stream
 │   └── account.py        # WIP: Interfaces with Alpaca trading account (details, orders)
-├── financebot/
-│   └── src/
-│       ├── config.py       # Application configuration parameters
-│       ├── data_handler.py # Fetches, formats, normalizes, and sequences data
-│       ├── model.py        # Defines the Transformer model architecture and PE
-│       ├── predictor.py    # Handles model inference (autoregressive prediction)
-│       ├── trainer.py      # Implements the training and validation loops
-│       └── plotting_utils.py# Utility functions for plotting loss and predictions
-├── data/                 # Directory for data caches and saved models (created based on config)
-└── graphs/               # Directory for saving plots (created based on config)
+└── financebot/
+    ├── src/
+    │   ├── config.py       # Application configuration parameters
+    │   ├── data_handler.py # Fetches, formats, normalizes, and sequences data
+    │   ├── model.py        # Defines the Transformer model architecture and PE
+    │   ├── predictor.py    # Handles model inference (autoregressive prediction)
+    │   ├── trainer.py      # Implements the training and validation loops
+    │   └── plotting_utils.py# Utility functions for plotting loss and predictions
+    ├── data/                 # Directory for data caches and saved models (created based on config)
+    └── graphs/               # Directory for saving plots (created based on config)
 ```
 
 
