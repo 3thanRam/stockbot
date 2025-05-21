@@ -16,9 +16,7 @@ def get_current_horizon(epoch, schedule):
     current_h = 1 # Initialize with a minimum horizon
     # Sort the schedule keys (epochs) to ensure we check them in increasing order
     sorted_epochs = sorted(schedule.keys())
-    # Iterate through the sorted start epochs in the schedule
     for start_epoch in sorted_epochs:
-        # If the current epoch is greater than or equal to the start epoch in the schedule
         if epoch >= start_epoch:
             # Update the current horizon to the value specified for this epoch range
             current_h = schedule[start_epoch]
@@ -199,12 +197,10 @@ def fit(model, train_dataloader, val_dataloader, optimizer, loss_fn):
         print("-" * 25, f"Epoch {epoch + 1}/{epochs} (Train Horizon: {current_train_horizon})", "-" * 25)
 
         # --- Perform the training loop for the current epoch ---
-        # Pass the model, optimizer, loss function, training data, and the current training horizon
         train_loss = train_loop(model, optimizer, loss_fn, train_dataloader, current_train_horizon)
         train_loss_list.append(train_loss) # Store the training loss
 
         # --- Perform the validation loop for the current epoch ---
-        # Pass the model, loss function, validation data, and the fixed validation horizon
         validation_loss = validation_loop(model, loss_fn, val_dataloader, validation_horizon)
         validation_loss_list.append(validation_loss) # Store the validation loss
 
@@ -238,11 +234,9 @@ def batchify_data(data, batch_size=config.BATCH_SIZE):
     batches = [] # List to store the generated batches
     X_enc_data, X_dec_in_data, Y_tgt_data = data # Unpack the data tuple
 
-    # Check if the three data components have the same number of samples
     if not (len(X_enc_data) == len(X_dec_in_data) == len(Y_tgt_data)):
         print("Error: Data components have different lengths. Cannot batch.")
         return [] # Return empty list on error
-    # Check if there is any data to batchify
     if len(X_enc_data) == 0:
         print("No data to batchify.")
         return [] # Return empty list if no data
@@ -258,7 +252,5 @@ def batchify_data(data, batch_size=config.BATCH_SIZE):
         if len(X_enc_batch) > 0:
             batches.append((X_enc_batch, X_dec_in_batch, Y_tgt_batch)) # Append the batch tuple to the list
 
-    # Print the number of batches created
     print(f"Created {len(batches)} batches of size <= {batch_size}")
-    # Return the list of batches
     return batches

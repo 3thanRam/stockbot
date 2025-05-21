@@ -52,4 +52,4 @@ def main(symbols = ["TSLA"],num_frames=10**5,interval=10**3,livedata=True,whatto
 # Standard Python entry point
 if __name__ == "__main__":
     # Run the main function when the script is executed directly
-    main(livedata=False)
+    main(livedata=True)

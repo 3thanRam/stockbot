@@ -9,7 +9,7 @@ import torch.nn as nn # Neural network modules (used for loss function)
 from datetime import timedelta, datetime
 # Alpaca library components for defining timeframes
 from alpaca.data.timeframe import TimeFrame, TimeFrameUnit
-
+import math
 # --- Core Parameters ---
 # Define base file paths relative to the script's location
 FILEPATH = os.path.dirname(os.path.realpath(__file__)) # Directory of the current script
@@ -37,17 +37,8 @@ CATEGORIES = [categ for (categ, categtype) in DATA_TYPE]
 # Number of features per time step, excluding the 'date'
 INPUT_SIZE = len(DATA_TYPE) - 1
 # The length of the input sequence (number of historical time steps) provided to the model encoder
-SEQ_LEN = 50
-# The maximum number of future steps the model will be trained to predict in one go (decoder length)
-N_PRED_TRAINING_MAX=60
-# Schedule for curriculum learning during training: defines the prediction horizon
-# at different training progress points (e.g., epoch ranges)
-CURRICULUM_SCHEDULE = {
-     0: 15,   # From start (epoch 0), predict 15 steps
-     15: 30,  # After 15 epochs, predict 30 steps
-    30: 45,  # After 30 epochs, predict 45 steps
-    50: N_PRED_TRAINING_MAX # After 50 epochs, predict up to max_horizon
-}
+SEQ_LEN = 100
+
 # The number of future steps to predict during live inference (using the trained model)
 N_PRED_INFERENCE = 10
 
@@ -58,7 +49,7 @@ CLIENT_ID_LIVE = 99
 FREQ = TimeFrame(1, TimeFrameUnit.Hour)
 # Define the time window for fetching historical data
 NOW = datetime.now().astimezone() # Get the current time with timezone
-N_DAYS=20 # Number of days of historical data to fetch
+N_DAYS=365 # Number of days of historical data to fetch
 END = (NOW - timedelta(hours=1)) # End time for data fetching (1 hour ago)
 START = END - timedelta(days=N_DAYS) # Start time for data fetching (N_DAYS before end)
 
@@ -68,6 +59,23 @@ BATCH_SIZE = 32 # Number of sequences per training batch
 LEARNING_RATE = 0.001 # Learning rate for the optimizer
 DATA_SPLIT_RATIO = 0.9 # NOTE: This variable appears unused; VAL_SPLIT_RATIO is used for splitting
 VAL_SPLIT_RATIO = 0.1  # Ratio of generated sequences to use for validation (e.g., 10% validation, 90% training)
+
+# The maximum number of future steps the model will be trained to predict in one go (decoder length)
+N_PRED_TRAINING_MAX=int(1.5*SEQ_LEN)
+# Schedule for curriculum learning during training: defines the prediction horizon
+# at different training progress points (e.g., epoch ranges)
+#CURRICULUM_SCHEDULE = {
+#     0: 15,   # From start (epoch 0), predict 15 steps
+#     15: 30,  # After 15 epochs, predict 30 steps
+#    30: 45,  # After 30 epochs, predict 45 steps
+#    EPOCHS: N_PRED_TRAINING_MAX # After EPOCHS epochs, predict up to max_horizon N_PRED_TRAINING_MAX
+#}
+CURRICULUM_SCHEDULE={}
+NC=8
+Cstep=EPOCHS/NC
+for c in range(NC):
+    CURRICULUM_SCHEDULE[int(c*Cstep)]=int(math.sin(0.5*math.pi*(c+1)/NC)*N_PRED_TRAINING_MAX)
+
 
 # --- Model Architecture Parameters ---
 DIM_MODEL = 64 # Dimension of the internal model representation (embeddings, feedforward)

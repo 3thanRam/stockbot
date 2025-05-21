@@ -15,15 +15,6 @@ This project combines a Transformer-based financial forecasting engine (`finance
 * **Alpaca Account Integration:** Connects to an Alpaca trading account (supports paper trading) to display account details and potentially execute orders (`account.py`).
 * **Configurable:** Parameters for data fetching, model architecture, training, and file paths are centrally managed (`financebot/src/config.py`).
 
-## Technology Stack
-
-* Python
-* PyTorch
-* NumPy
-* Matplotlib
-* Alpaca-Trade-API
-
-## Getting Started
 
 ### Prerequisites
 
@@ -66,7 +57,7 @@ This project combines a Transformer-based financial forecasting engine (`finance
     $env:APCA_API_KEY_ID="YOUR_API_KEY_ID"
     $env:APCA_API_SECRET_KEY="YOUR_API_SECRET_KEY"
     ```
-    *Note: For persistence, you might want to add these lines to your shell's profile file (.bashrc, .zshrc, etc.) or set them system-wide.*
+
 
 ## Configuration
 
@@ -104,7 +95,7 @@ The plot window will appear, displaying the historical data, predicted future va
 │   ├── plot.py           # Matplotlib figure setup, plot artists, and interactive buttons
 │   ├── livedata.py       # Handles fetching and integrating live Alpaca stream data
 │   ├── simulatedata.py   # Handles fetching historical data and simulating a stream
-│   └── account.py        # Interfaces with Alpaca trading account (details, orders)
+│   └── account.py        # WIP: Interfaces with Alpaca trading account (details, orders)
 ├── financebot/
 │   └── src/
 │       ├── config.py       # Application configuration parameters

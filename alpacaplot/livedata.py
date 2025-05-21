@@ -6,7 +6,7 @@ import threading
 from datetime import timedelta, datetime
 # Alpaca library for connecting to the live stock data stream
 from alpaca.data.live import StockDataStream
-# Imports custom data classes/functions (NOTE: 'dataclass' likely misspelled module name)
+# Imports custom data classes/functions
 # plotdata: Base class for handling plot data and animation state
 # gethistoricalstockbars: Function to fetch initial historical data
 # format_data: Function to process incoming stream data
@@ -15,7 +15,7 @@ from dataclass import plotdata,gethistoricalstockbars,format_data,api_key,secret
 
 
 # Global list to store the received stream data points
-# NOTE: Using a global list accessible/modified by both the async handler and the plot class
+# Using a global list accessible/modified by both the async handler and the plot class
 streamdata=[]
 
 # Async function to handle incoming stock data from the stream
@@ -60,8 +60,8 @@ class plotlivedata(plotdata):
 
     # Method called by the animation to update the plot with new live data
     def updatedata(self,framei):
-        # Update account information (method likely from parent class)
-        self.account.update()
+        # Update account information 
+        #self.account.update()
         # Only update data time step if the animation is running (not paused)
         if self.animation_is_running:
             # Get the latest snapshot of the stream data
