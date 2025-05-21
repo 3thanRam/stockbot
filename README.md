@@ -89,6 +89,7 @@ The plot window will appear, displaying the historical data, predicted future va
 *Note: If you run for the first time with `LOAD_SAVED_MODEL = False`, the script will first fetch training data (which can take some time depending on the date range and number of symbols), train the model, save it, and then proceed to the visualization.*
 
 ## Project Structure
+```bash
 .
 ├── alpacabot/
 │   ├── main.py           # Main entry point, orchestrates setup and animation
@@ -106,7 +107,7 @@ The plot window will appear, displaying the historical data, predicted future va
 │       └── plotting_utils.py# Utility functions for plotting loss and predictions
 ├── data/                 # Directory for data caches and saved models (created based on config)
 └── graphs/               # Directory for saving plots (created based on config)
-
+```
 
 
 ## Important Considerations
